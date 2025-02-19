@@ -1,5 +1,6 @@
 import { Alumno } from "app/entities/Alumnos";
 import { Animal } from "app/entities/Animales";
+import { Producto } from "app/entities/Productos";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 
@@ -12,5 +13,5 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: false,
-  entities: [Alumno, Animal], // Asegúrate de importar correctamente
+  entities: [Alumno, Animal, Producto], // Asegúrate de importar correctamente
 });
