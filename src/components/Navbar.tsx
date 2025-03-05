@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "app/lib/utils";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,16 +19,19 @@ const Navbar = () => {
 
           {/* Menú en pantallas grandes */}
           <div className="hidden md:flex space-x-6">
-            <NavLink href="/">Inicio</NavLink>
-            <NavLink href="/about">Acerca</NavLink>
-            <NavLink href="/services">Servicios</NavLink>
-            <NavLink href="/contact">Contacto</NavLink>
+            {/* Link de los componetes usando Link de next */}
+            <Link href={"/"}>Inicio</Link>
+            <Link href={"/acerca"}>Acerca</Link>
+            <Link href={"/servicios"}>Servicios</Link>
+            <Link href={"/contacto"}>Contacto</Link>
           </div>
 
           {/* Botón hamburguesa en móviles */}
           <button
             className="md:hidden text-gray-900 dark:text-white"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
