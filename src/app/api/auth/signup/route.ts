@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error(error);
+    console.error("El error es:", error);
     return NextResponse.json(
       { error: "Error en el servidor" },
       { status: 500 }
