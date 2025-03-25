@@ -20,3 +20,12 @@ model User {
   password String
   createdAt DateTime @default(now())
 }
+
+model Proveedor{
+  id       Int    @id @default(autoincrement())
+  nombre   String
+  direccion String
+  telefono String
+  email    String
+  createdAt DateTime @default(now())
+}
