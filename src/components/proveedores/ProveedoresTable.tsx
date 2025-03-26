@@ -35,7 +35,7 @@ const ProveedoresTable = () => {
         <table className="w-full text-sm text-left">
           <thead className="bg-gray-100 dark:bg-gray-800">
             <tr>
-              <th className="p-2">Nombre</th>
+              <th className="p-2">Nombre del proveedor</th>
               <th className="p-2">Dirección</th>
               <th className="p-2">Teléfono</th>
               <th className="p-2">Email</th>
