@@ -14,11 +14,13 @@ const ProveedoresTable = () => {
     null
   );
   const [dialogType, setDialogType] = useState<"edit" | "delete" | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchProveedores = async () => {
     try {
       const data = await proveedoresAPI.getAll();
       setProveedores(data);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al cargar proveedores:", error);
     }
@@ -42,48 +44,58 @@ const ProveedoresTable = () => {
               <th className="p-2 text-right">Acciones</th>
             </tr>
           </thead>
-          <tbody>
-            {proveedores.map((proveedor) => (
-              <tr key={proveedor.id} className="border-b">
-                <td className="p-2">{proveedor.nombre}</td>
-                <td className="p-2">{proveedor.direccion}</td>
-                <td className="p-2">{proveedor.telefono}</td>
-                <td className="p-2">{proveedor.email}</td>
-                <td className="p-2 text-right space-x-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      setSelectedProveedor(proveedor);
-                      setDialogType("edit");
-                    }}
-                  >
-                    <Pencil size={16} />
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => {
-                      setSelectedProveedor(proveedor);
-                      setDialogType("delete");
-                    }}
-                  >
-                    <Trash size={16} />
-                  </Button>
-                </td>
-              </tr>
-            ))}
-            {proveedores.length === 0 && (
+          {isLoading ? (
+            <tbody>
               <tr>
-                <td
-                  colSpan={5}
-                  className="text-center p-4 text-muted-foreground"
-                >
-                  No hay proveedores registrados.
+                <td colSpan={5} className="text-center p-4">
+                  Cargando proveedores...
                 </td>
               </tr>
-            )}
-          </tbody>
+            </tbody>
+          ) : (
+            <tbody>
+              {proveedores.map((proveedor) => (
+                <tr key={proveedor.id} className="border-b">
+                  <td className="p-2">{proveedor.nombre}</td>
+                  <td className="p-2">{proveedor.direccion}</td>
+                  <td className="p-2">{proveedor.telefono}</td>
+                  <td className="p-2">{proveedor.email}</td>
+                  <td className="p-2 text-right space-x-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedProveedor(proveedor);
+                        setDialogType("edit");
+                      }}
+                    >
+                      <Pencil size={16} />
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedProveedor(proveedor);
+                        setDialogType("delete");
+                      }}
+                    >
+                      <Trash size={16} />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+              {proveedores.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={5}
+                    className="text-center p-4 text-muted-foreground"
+                  >
+                    No hay proveedores registrados.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          )}
         </table>
       </div>
 
